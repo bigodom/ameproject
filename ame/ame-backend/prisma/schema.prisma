@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Responsavel {
+  responsavelcpf String        @id
+  nome           String
+  beneficiados   Beneficiado[]
+}
+
+model Beneficiado {
+  beneficiadocpf  String      @id
+  nome            String
+  data_nascimento DateTime
+  genero          String
+  telefone        String
+  email           String
+  cep             String
+  faixa_etaria    String
+  endereco        String
+  responsavel     Responsavel @relation(fields: [responsavelcpf], references: [responsavelcpf])
+  responsavelcpf  String
+  Cadastro        Cadastro[]
+}
+
+model Cadastro {
+  id             Int         @id @default(autoincrement())
+  data_cadastro  DateTime
+  beneficiado    Beneficiado @relation(fields: [beneficiadocpf], references: [beneficiadocpf])
+  beneficiadocpf String
+}
