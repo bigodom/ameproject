@@ -18,6 +18,7 @@ export interface Beneficiado {
 const ListarBeneficiados = () => {
     const [beneficiados, setBeneficiados] = useState<Beneficiado[]>([]);
     const [responsaveis, setResponsaveis] = useState<Responsavel[]>([]);
+    const [filtro, setFiltro] = useState('');
 
     useEffect(() => {
         api.get('/beneficiado').then(response => {
@@ -31,10 +32,15 @@ const ListarBeneficiados = () => {
         });
     }, []);
 
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFiltro(event.target.value);
+    };
+
     //retorna uma tabela com coluna nome, cpf, data de nascimento, genero, telefone, email, cep, faixa etaria, endereco, nome do responsavel e cpf do responsavel
     return (
         <>
             <h1>Beneficiados</h1>
+            <input type="text" value={filtro} onChange={handleInputChange}/>
             <table>
                 <thead>
                     <tr>
@@ -52,23 +58,25 @@ const ListarBeneficiados = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {beneficiados.map(beneficiado => (
-                        <tr key={beneficiado.beneficiadocpf}>
-                            <td>{beneficiado.nome}</td>
-                            <td>{beneficiado.beneficiadocpf}</td>
-                            <td>{beneficiado.data_nascimento}</td>
-                            <td>{beneficiado.genero}</td>
-                            <td>{beneficiado.telefone}</td>
-                            <td>{beneficiado.email}</td>
-                            <td>{beneficiado.cep}</td>
-                            <td>{beneficiado.faixa_etaria}</td>
-                            <td>{beneficiado.endereco}</td>
-                            <td>{responsaveis.map(responsavel => (
-                                beneficiado.responsavelcpf === responsavel.responsavelcpf ? responsavel.nome : ''
-                            ))}</td>
-                            <td>{beneficiado.responsavelcpf}</td>
-                        </tr>
-                    ))}
+                    {beneficiados
+                        .filter(beneficiado => beneficiado.nome.toLowerCase().includes(filtro.toLowerCase()) || beneficiado.beneficiadocpf.includes(filtro))
+                        .map(beneficiado => (
+                            <tr key={beneficiado.beneficiadocpf}>
+                                <td>{beneficiado.nome}</td>
+                                <td>{beneficiado.beneficiadocpf}</td>
+                                <td>{beneficiado.data_nascimento}</td>
+                                <td>{beneficiado.genero}</td>
+                                <td>{beneficiado.telefone}</td>
+                                <td>{beneficiado.email}</td>
+                                <td>{beneficiado.cep}</td>
+                                <td>{beneficiado.faixa_etaria}</td>
+                                <td>{beneficiado.endereco}</td>
+                                <td>{responsaveis.map(responsavel => (
+                                    beneficiado.responsavelcpf === responsavel.responsavelcpf ? responsavel.nome : ''
+                                ))}</td>
+                                <td>{beneficiado.responsavelcpf}</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
         </>

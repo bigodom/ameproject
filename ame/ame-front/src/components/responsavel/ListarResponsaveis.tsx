@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
-interface Responsavel {
+export interface Responsavel {
     responsavelcpf: string;
     nome: string;
 }
 
 const ListarResponsaveis = () => {
     const [responsaveis, setResponsaveis] = useState<Responsavel[]>([]);
+    const [filtro, setFiltro] = useState('');
 
     useEffect(() => {
         api.get('/responsavel').then(response => {
@@ -16,10 +17,15 @@ const ListarResponsaveis = () => {
         });
     }, []);
 
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFiltro(event.target.value);
+    };
+
     //retorna uma tabela com coluna nome e coluna cpf dos responsaveis
     return (
         <div>
             <h1>Responsaveis</h1>
+            <input type="text" value={filtro} onChange={handleInputChange}/>
             <table>
                 <thead>
                     <tr>
@@ -28,12 +34,14 @@ const ListarResponsaveis = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {responsaveis.map(responsavel => (
-                        <tr key={responsavel.responsavelcpf}>
-                            <td>{responsavel.nome}</td>
-                            <td>{responsavel.responsavelcpf}</td>
-                        </tr>
-                    ))}
+                    {responsaveis
+                        .filter(responsavel => responsavel.nome.toLowerCase().includes(filtro.toLowerCase()) || responsavel.responsavelcpf.includes(filtro))
+                        .map(responsavel => (
+                            <tr key={responsavel.responsavelcpf}>
+                                <td>{responsavel.nome}</td>
+                                <td>{responsavel.responsavelcpf}</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
         </div>
