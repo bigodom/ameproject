@@ -8,7 +8,7 @@ CREATE TABLE "Responsavel" (
 CREATE TABLE "Beneficiado" (
     "beneficiadocpf" TEXT NOT NULL PRIMARY KEY,
     "nome" TEXT NOT NULL,
-    "data_nascimento" DATETIME NOT NULL,
+    "data_nascimento" TEXT NOT NULL,
     "genero" TEXT NOT NULL,
     "telefone" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE "Beneficiado" (
 -- CreateTable
 CREATE TABLE "Cadastro" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "data_cadastro" DATETIME NOT NULL,
+    "data_cadastro" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "beneficiadocpf" TEXT NOT NULL,
     CONSTRAINT "Cadastro_beneficiadocpf_fkey" FOREIGN KEY ("beneficiadocpf") REFERENCES "Beneficiado" ("beneficiadocpf") ON DELETE RESTRICT ON UPDATE CASCADE
 );

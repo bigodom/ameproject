@@ -11,7 +11,7 @@ const ListarResponsaveis = () => {
     const [filtro, setFiltro] = useState('');
 
     useEffect(() => {
-        api.get('/responsavel').then(response => {
+        api.get('/responsaveis').then(response => {
             console.log(response.data);
             setResponsaveis(response.data);
         });

@@ -21,12 +21,12 @@ const ListarBeneficiados = () => {
     const [filtro, setFiltro] = useState('');
 
     useEffect(() => {
-        api.get('/beneficiado').then(response => {
+        api.get('/beneficiados').then(response => {
             console.log(response.data);
             setBeneficiados(response.data);
         });
 
-        api.get('/responsavel').then(response => {
+        api.get('/responsaveis').then(response => {
             console.log(response.data);
             setResponsaveis(response.data);
         });

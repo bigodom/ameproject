@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 interface ResponsavelFormData {
   nome: string;
@@ -11,13 +13,15 @@ const CadastrarResponsavel = () => {
     responsavelcpf: '',
   })
 
+  const navigate = useNavigate();
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleNewResponsavel = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleNewResponsavel = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const { nome, responsavelcpf } = formData
@@ -28,14 +32,19 @@ const CadastrarResponsavel = () => {
     }
 
     console.log(data)
-
-    alert('Responsavel cadastrado com sucesso!')
-  }
+    try {
+      await api.post('/responsavel', data);
+      alert('Responsável cadastrado com sucesso!');
+      navigate('/listarresponsaveis')
+    } catch (error) {
+      alert('Erro ao cadastrar responsável!');
+    }
+  };
 
   return (
     <div>
       <h1>Cadastrar Responsavel</h1>
-      <form>
+      <form onSubmit={handleNewResponsavel}>
         <div>
           <label htmlFor="nome">Nome</label>
           <input

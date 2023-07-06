@@ -19,7 +19,7 @@ model Responsavel {
 model Beneficiado {
   beneficiadocpf  String      @id
   nome            String
-  data_nascimento DateTime
+  data_nascimento String
   genero          String
   telefone        String
   email           String
@@ -33,7 +33,7 @@ model Beneficiado {
 
 model Cadastro {
   id             Int         @id @default(autoincrement())
-  data_cadastro  DateTime
+  data_cadastro  DateTime    @default(now())
   beneficiado    Beneficiado @relation(fields: [beneficiadocpf], references: [beneficiadocpf])
   beneficiadocpf String
 }

@@ -8,7 +8,7 @@ import { deleteResponsavelController } from "../controller/responsavel/deleteRes
 const responsavelRouter = Router();
 
 responsavelRouter.post("/responsavel", createResponsavelController);
-responsavelRouter.get("/responsavel", getAllResponsavelController);
+responsavelRouter.get("/responsaveis", getAllResponsavelController);
 responsavelRouter.get("/responsavel/:responsavelcpf", getByIdResponsavelController);
 responsavelRouter.put("/responsavel/:responsavelcpf", updateResponsavelController);
 responsavelRouter.delete("/responsavel/:responsavelcpf", deleteResponsavelController);

@@ -9,7 +9,7 @@ import { deleteBeneficiadoController } from "../controller/beneficiado/deleteBen
 const beneficiadoRouter = Router();
 
 beneficiadoRouter.post("/beneficiado", createBeneficiadoController);
-beneficiadoRouter.get("/beneficiado", getAllBeneficiadoController);
+beneficiadoRouter.get("/beneficiados", getAllBeneficiadoController);
 beneficiadoRouter.get("/beneficiado/:beneficiadocpf", getByIdBeneficiadoController);
 beneficiadoRouter.put("/beneficiado/:beneficiadocpf", updateBeneficiadoController);
 beneficiadoRouter.delete("/beneficiado/:beneficiadocpf", deleteBeneficiadoController);
