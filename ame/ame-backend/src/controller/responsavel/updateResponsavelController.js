@@ -11,7 +11,8 @@ export async function updateResponsavelController(req, res) {
       },
       data: {
         responsavelcpf: novocpf,
-        nome
+        nome,
+        pacotes
       }
     });
 

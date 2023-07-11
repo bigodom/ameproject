@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 interface ResponsavelFormData {
   nome: string;
   responsavelcpf: string;
+  pacotes: number;
 }
 
 const CadastrarResponsavel = () => {
   const [formData, setFormData] = useState<ResponsavelFormData>({
     nome: '',
     responsavelcpf: '',
+    pacotes: 0,
   })
 
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const CadastrarResponsavel = () => {
     const data = {
       nome,
       responsavelcpf,
+      pacotes: 0,
     }
 
     console.log(data)
@@ -46,7 +49,7 @@ const CadastrarResponsavel = () => {
       <h1>Cadastrar Responsavel</h1>
       <form onSubmit={handleNewResponsavel}>
         <div>
-          <label htmlFor="nome">Nome</label>
+          <label htmlFor="nome">Nome: </label>
           <input
             type="text"
             name="nome"
@@ -55,11 +58,20 @@ const CadastrarResponsavel = () => {
           />
         </div>
         <div>
-          <label htmlFor="responsavelcpf">CPF</label>
+          <label htmlFor="responsavelcpf">CPF: </label>
           <input
             type="text"
             name="responsavelcpf"
             id="responsavelcpf"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="pacotes">Pacotes: </label>
+          <input
+            type="number"
+            name="pacotes"
+            id="pacotes"
             onChange={handleInputChange}
           />
         </div>

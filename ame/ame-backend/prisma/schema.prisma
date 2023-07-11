@@ -13,27 +13,22 @@ datasource db {
 model Responsavel {
   responsavelcpf String        @id
   nome           String
+  pacotes        Int
   beneficiados   Beneficiado[]
 }
 
 model Beneficiado {
-  beneficiadocpf  String      @id
-  nome            String
-  data_nascimento String
-  genero          String
-  telefone        String
-  email           String
-  cep             String
-  faixa_etaria    String
-  endereco        String
-  responsavel     Responsavel @relation(fields: [responsavelcpf], references: [responsavelcpf])
-  responsavelcpf  String
-  Cadastro        Cadastro[]
-}
-
-model Cadastro {
-  id             Int         @id @default(autoincrement())
-  data_cadastro  DateTime    @default(now())
-  beneficiado    Beneficiado @relation(fields: [beneficiadocpf], references: [beneficiadocpf])
-  beneficiadocpf String
+  beneficiadocpf   String      @id
+  nome             String
+  data_nascimento  String
+  genero           String
+  telefone         String
+  email            String
+  cep              String
+  faixa_etaria     String
+  endereco         String
+  responsavel      Responsavel @relation(fields: [responsavelcpf], references: [responsavelcpf])
+  responsavelcpf   String
+  data_cadastro    DateTime    @default(now())
+  data_atualizacao DateTime    @updatedAt
 }

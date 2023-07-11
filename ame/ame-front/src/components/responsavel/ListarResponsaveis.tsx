@@ -4,6 +4,7 @@ import api from "../../services/api";
 export interface Responsavel {
     responsavelcpf: string;
     nome: string;
+    pacotes: number;
 }
 
 const ListarResponsaveis = () => {
@@ -29,8 +30,9 @@ const ListarResponsaveis = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
+                        <th>Nome: </th>
+                        <th>CPF: </th>
+                        <th>Pacotes: </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +42,7 @@ const ListarResponsaveis = () => {
                             <tr key={responsavel.responsavelcpf}>
                                 <td>{responsavel.nome}</td>
                                 <td>{responsavel.responsavelcpf}</td>
+                                <td>{responsavel.pacotes}</td>
                             </tr>
                         ))}
                 </tbody>

@@ -13,6 +13,7 @@ export interface Beneficiado {
     faixa_etaria: string;
     endereco: string;
     responsavelcpf: string;
+    data_cadastro: string;
 }
 
 const ListarBeneficiados = () => {
@@ -55,6 +56,7 @@ const ListarBeneficiados = () => {
                         <th>Endereço</th>
                         <th>Nome do Responsável</th>
                         <th>CPF do Responsável</th>
+                        <th>Data de Cadastro</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +77,7 @@ const ListarBeneficiados = () => {
                                     beneficiado.responsavelcpf === responsavel.responsavelcpf ? responsavel.nome : ''
                                 ))}</td>
                                 <td>{beneficiado.responsavelcpf}</td>
+                                <td>{beneficiado.data_cadastro}</td>
                             </tr>
                         ))}
                 </tbody>

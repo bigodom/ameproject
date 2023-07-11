@@ -8,6 +8,7 @@ export async function createResponsavelController(req, res) {
       data: {
         responsavelcpf,
         nome,
+        pacotes
       }
     });
 
