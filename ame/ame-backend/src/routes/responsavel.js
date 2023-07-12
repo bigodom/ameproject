@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createResponsavelController } from "../controller/responsavel/CreateResponsavelController.js";
+import { createResponsavelController } from "../controller/responsavel/createResponsavelController.js";
 import { getAllResponsavelController } from "../controller/responsavel/getAllResponsavelController.js";
 import { getByIdResponsavelController } from "../controller/responsavel/getByIdResponsavelController.js";
 import { updateResponsavelController } from "../controller/responsavel/updateResponsavelController.js";

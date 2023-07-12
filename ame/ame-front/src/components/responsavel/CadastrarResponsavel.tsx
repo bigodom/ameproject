@@ -20,18 +20,20 @@ const CadastrarResponsavel = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
-    setFormData({ ...formData, [name]: value })
+    const parsedValue = name === 'pacotes' ? parseInt(value) : value;
+
+    setFormData({ ...formData, [name]: parsedValue })
   }
 
   const handleNewResponsavel = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const { nome, responsavelcpf } = formData
+    const { nome, responsavelcpf, pacotes } = formData
 
     const data = {
-      nome,
       responsavelcpf,
-      pacotes: 0,
+      nome,
+      pacotes,
     }
 
     console.log(data)

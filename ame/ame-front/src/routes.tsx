@@ -3,15 +3,17 @@ import { CadastrarResponsavel } from "./components/responsavel/CadastrarResponsa
 import { ListarResponsaveis } from "./components/responsavel/ListarResponsaveis";
 import { ListarBeneficiados } from "./components/beneficiado/ListarBeneficiados";
 import CadastrarBeneficiado from "./components/beneficiado/CadastrarBeneficiado";
+import { Navbar } from "./components/navbar/Navbar";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/cadastraresponsavel" element={<CadastrarResponsavel />} />
-        <Route path="/listarresponsaveis" element={<ListarResponsaveis />} />
-        <Route path="/cadastrarbeneficiado" element={<CadastrarBeneficiado />}/>
-        <Route path="/listarbeneficiados" element={<ListarBeneficiados />} />
+        <Route path="/" element={<Navbar />}/>
+        <Route path="/cadastraresponsavel" element={<><Navbar/><CadastrarResponsavel /></>}/>
+        <Route path="/listarresponsaveis" element={<><Navbar/><ListarResponsaveis /></>}/>
+        <Route path="/cadastrarbeneficiado" element={<><Navbar/><CadastrarBeneficiado /></>}/>
+        <Route path="/listarbeneficiados" element={<><Navbar  /><ListarBeneficiados /></>}/>
       </Routes>
     </BrowserRouter>
   )

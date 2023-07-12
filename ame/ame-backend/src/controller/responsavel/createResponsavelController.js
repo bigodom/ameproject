@@ -1,7 +1,7 @@
 import { prisma } from '../../database/client.js'
 
 export async function createResponsavelController(req, res) {
-  const { responsavelcpf, nome } = req.body;
+  const { responsavelcpf, nome, pacotes } = req.body;
 
   try {
     const responsavel = await prisma.responsavel.create({
