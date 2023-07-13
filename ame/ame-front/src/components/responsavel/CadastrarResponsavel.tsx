@@ -47,7 +47,7 @@ const CadastrarResponsavel = () => {
   };
 
   return (
-    <div>
+    <div className='modal'>
       <h1>Cadastrar Responsavel</h1>
       <form onSubmit={handleNewResponsavel}>
         <div>
