@@ -28,15 +28,32 @@ const CadastrarBeneficiado = () => {
     endereco: '',
     responsavelcpf: '',
   });
+  const [responsavelNome, setResponsavelNome] = useState('');
 
   const navigate = useNavigate();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
+
+    if (name === 'responsavelcpf') {
+      try {
+        const responsavel = await fetchResponsavelNome(value);
+        setResponsavelNome(responsavel.nome);
+      } catch (error) {
+        setResponsavelNome('');
+      }
+    }
+  };
+
+  const fetchResponsavelNome = async (cpf: string) => {
+    // Faça uma chamada à API para buscar o nome do responsável com base no CPF fornecido
+    // Substitua 'sua-api.com' pela URL correta da sua API
+    const response = await api.get(`/responsavel/${cpf}`);
+    return response.data;
   };
 
   const handleNewBeneficiado = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -169,6 +186,7 @@ const CadastrarBeneficiado = () => {
             value={formValues.responsavelcpf}
             onChange={handleChange}
           />
+          <span>{responsavelNome}</span>
         </div>
         <button type="submit">Cadastrar Beneficiado</button>
       </form>
