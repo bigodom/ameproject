@@ -5,7 +5,7 @@ import { Responsavel } from "../responsavel/ListarResponsaveis";
 export interface Beneficiado {
     beneficiadocpf: string;
     nome: string;
-    data_nascimento: String;
+    data_nascimento: string;
     genero: string;
     telefone: string;
     email: string;
@@ -37,12 +37,19 @@ const ListarBeneficiados = () => {
         setFiltro(event.target.value);
     };
 
-    //retorna uma tabela com coluna nome, cpf, data de nascimento, genero, telefone, email, cep, faixa etaria, endereco, nome do responsavel e cpf do responsavel
+    const formatDate = (date: string) => {
+        const data = new Date(date);
+        const dia = data.getDate().toString().padStart(2, '0');
+        const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+        const ano = data.getFullYear();
+        return `${dia}-${mes}-${ano}`;
+    }
+
     return (
-        <>
-            <h1>Beneficiados</h1>
-            <input type="text" value={filtro} onChange={handleInputChange}/>
-            <table>
+        <div className="container">
+            <h1 className="text-center">Beneficiados</h1>
+            <input type="text" className="form-control mt-3" placeholder="Filtrar por nome ou CPF" value={filtro} onChange={handleInputChange}/>
+            <table className="table table-bordered mt-3 table-striped-columns">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -77,12 +84,12 @@ const ListarBeneficiados = () => {
                                     beneficiado.responsavelcpf === responsavel.responsavelcpf ? responsavel.nome : ''
                                 ))}</td>
                                 <td>{beneficiado.responsavelcpf}</td>
-                                <td>{beneficiado.data_cadastro}</td>
+                                <td>{formatDate(beneficiado.data_cadastro)}</td>
                             </tr>
                         ))}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }
 

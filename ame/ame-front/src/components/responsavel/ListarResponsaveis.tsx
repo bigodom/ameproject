@@ -24,10 +24,10 @@ const ListarResponsaveis = () => {
 
     //retorna uma tabela com coluna nome e coluna cpf dos responsaveis
     return (
-        <div>
-            <h1>Responsaveis</h1>
-            <input type="text" value={filtro} onChange={handleInputChange}/>
-            <table>
+        <div className="container">
+            <h1 className="text-center">Responsaveis</h1>
+            <input type="text" className="form-control mt-3" placeholder="Filtrar por nome ou CPF" value={filtro} onChange={handleInputChange}/>
+            <table className="table table-bordered mt-3 table-striped-columns">
                 <thead>
                     <tr>
                         <th>Nome: </th>
@@ -43,6 +43,7 @@ const ListarResponsaveis = () => {
                                 <td>{responsavel.nome}</td>
                                 <td>{responsavel.responsavelcpf}</td>
                                 <td>{responsavel.pacotes}</td>
+                                <td><button className="btn btn-primary">ATUALIZAR</button></td>
                             </tr>
                         ))}
                 </tbody>

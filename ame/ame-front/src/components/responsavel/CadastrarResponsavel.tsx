@@ -47,40 +47,45 @@ const CadastrarResponsavel = () => {
   };
 
   return (
-    <div className='modal'>
-      <h1>Cadastrar Responsavel</h1>
+    <>
+    <h1 className='text-center'>Cadastrar Responsavel</h1>
+    <div className='container d-flex justify-content-center align-items-center'>
       <form onSubmit={handleNewResponsavel}>
-        <div>
-          <label htmlFor="nome">Nome: </label>
+        <div className="mb-3 input-group">
+          <label htmlFor="nome" className="input-group-text">Nome: </label>
           <input
             type="text"
+            className='form-control'
             name="nome"
             id="nome"
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label htmlFor="responsavelcpf">CPF: </label>
+        <div className="mb-3 input-group">
+          <label htmlFor="responsavelcpf" className="input-group-text">CPF: </label>
           <input
             type="text"
+            className='form-control'
             name="responsavelcpf"
             id="responsavelcpf"
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label htmlFor="pacotes">Pacotes: </label>
+        <div className="mb-3 input-group">
+          <label htmlFor="pacotes" className="input-group-text">Pacotes: </label>
           <input
             type="number"
+            className='form-control'
             name="pacotes"
             id="pacotes"
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Cadastrar</button>
+        <button type="submit" className='btn btn-primary'>Cadastrar</button>
       </form>
     </div>
-  )
-}
+    </>
+  );
+};
 
 export { CadastrarResponsavel }
