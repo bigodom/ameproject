@@ -30,9 +30,9 @@ const ListarResponsaveis = () => {
             <table className="table table-bordered mt-3 table-striped-columns">
                 <thead>
                     <tr>
-                        <th>Nome: </th>
-                        <th>CPF: </th>
-                        <th>Pacotes: </th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Pacotes</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -27,6 +27,7 @@ model Beneficiado {
   cep              String
   faixa_etaria     String
   endereco         String
+  bairro           String
   responsavel      Responsavel @relation(fields: [responsavelcpf], references: [responsavelcpf])
   responsavelcpf   String
   data_cadastro    DateTime    @default(now())

@@ -1,7 +1,7 @@
 import { prisma } from '../../database/client.js'
 
 export async function createBeneficiadoController(req, res) {
-  const { beneficiadocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, responsavelcpf } = req.body;
+  const { beneficiadocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, bairro, responsavelcpf } = req.body;
 
   try {
     const beneficiado = await prisma.beneficiado.create({
@@ -15,6 +15,7 @@ export async function createBeneficiadoController(req, res) {
         cep,
         faixa_etaria,
         endereco,
+        bairro,
         responsavel: {
           connect: {
             responsavelcpf: responsavelcpf

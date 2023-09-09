@@ -12,6 +12,7 @@ interface BeneficiadoFormData {
   cep: string;
   faixa_etaria: string;
   endereco: string;
+  bairro: string;
   responsavelcpf: string;
 }
 
@@ -26,13 +27,14 @@ const CadastrarBeneficiado = () => {
     cep: '',
     faixa_etaria: '',
     endereco: '',
+    bairro: '',
     responsavelcpf: '',
   });
   const [responsavelNome, setResponsavelNome] = useState('');
 
   const navigate = useNavigate();
 
-  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -58,7 +60,7 @@ const CadastrarBeneficiado = () => {
 
   const handleNewBeneficiado = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { beneficiadocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, responsavelcpf } = formValues;
+    const { beneficiadocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, bairro, responsavelcpf } = formValues;
 
     const data = {
       beneficiadocpf,
@@ -70,6 +72,7 @@ const CadastrarBeneficiado = () => {
       cep,
       faixa_etaria,
       endereco,
+      bairro,
       responsavelcpf,
     };
 
@@ -86,126 +89,126 @@ const CadastrarBeneficiado = () => {
 
   return (
     <>
-    <h1 className='text-center'>Cadastrar Beneficiado</h1>
-    <div className='container d-flex justify-content-center align-items-center'>
-      
-      <form onSubmit={handleNewBeneficiado}>
-        <div className="mb-3 input-group">
-          <label htmlFor="beneficiadocpf" className="input-group-text">
-            CPF:
-          </label>
-          <input
-            type="text"
-            className='form-control'
-            id="beneficiadocpf"
-            name="beneficiadocpf"
-            value={formValues.beneficiadocpf}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="nome" className="input-group-text">Nome:</label>
-          <input
-            type="text"
-            className='form-control'
-            id="nome"
-            name="nome"
-            value={formValues.nome}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="data_nascimento" className="input-group-text">Data de Nascimento:</label>
-          <input
-            type="date"
-            className='form-control'
-            id="data_nascimento"
-            name="data_nascimento"
-            value={formValues.data_nascimento}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="genero" className="input-group-text">Gênero:</label>
-          <input
-            type="text"
-            className='form-control'
-            id="genero"
-            name="genero"
-            value={formValues.genero}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="telefone" className="input-group-text">Telefone:</label>
-          <input
-            type="text"
-            className='form-control'
-            id="telefone"
-            name="telefone"
-            value={formValues.telefone}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="email" className="input-group-text">E-mail:</label>
-          <input
-            type="email"
-            className='form-control'
-            id="email"
-            name="email"
-            value={formValues.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="cep" className="input-group-text">CEP:</label>
-          <input
-            type="text"
-            className='form-control'
-            id="cep"
-            name="cep"
-            value={formValues.cep}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="faixa_etaria" className="input-group-text">Faixa Etária:</label>
-          <input
-            type="text"
-            className='form-control'
-            id="faixa_etaria"
-            name="faixa_etaria"
-            value={formValues.faixa_etaria}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="endereco" className="input-group-text">Endereço:</label>
-          <input
-            type="text"
-            className='form-control'
-            id="endereco"
-            name="endereco"
-            value={formValues.endereco}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3 input-group">
-          <label htmlFor="responsavelcpf" className="input-group-text">CPF do Responsável:</label>
-          <input
-            type="text"
-            className='form-control'
-            id="responsavelcpf"
-            name="responsavelcpf"
-            value={formValues.responsavelcpf}
-            onChange={handleChange}
-          />
-          <span className="input-group-text">{responsavelNome}</span>
-        </div>
-        <button type="submit" className="btn btn-primary">Cadastrar Beneficiado</button>
-      </form>
-    </div>
+      <h1 className='text-center'>Cadastrar Beneficiado</h1>
+      <div className='container d-flex justify-content-center align-items-center'>
+
+        <form onSubmit={handleNewBeneficiado}>
+          <div className="mb-3 input-group">
+            <label htmlFor="beneficiadocpf" className="input-group-text">
+              CPF:
+            </label>
+            <input
+              type="text"
+              className='form-control'
+              id="beneficiadocpf"
+              name="beneficiadocpf"
+              value={formValues.beneficiadocpf}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="nome" className="input-group-text">Nome:</label>
+            <input
+              type="text"
+              className='form-control'
+              id="nome"
+              name="nome"
+              value={formValues.nome}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="data_nascimento" className="input-group-text">Data de Nascimento:</label>
+            <input
+              type="date"
+              className='form-control'
+              id="data_nascimento"
+              name="data_nascimento"
+              value={formValues.data_nascimento}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="genero" className="input-group-text">Gênero:</label>
+            <select name="genero" id="genero" className='form-select' onChange={handleChange}>
+              <option disabled>Clique para selecionar</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Não Binário">Não Binário</option>
+            </select>
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="telefone" className="input-group-text">Telefone:</label>
+            <input
+              type="text"
+              className='form-control'
+              id="telefone"
+              name="telefone"
+              value={formValues.telefone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="email" className="input-group-text">E-mail:</label>
+            <input
+              type="email"
+              className='form-control'
+              id="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="cep" className="input-group-text">CEP:</label>
+            <input
+              type="text"
+              className='form-control'
+              id="cep"
+              name="cep"
+              value={formValues.cep}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="faixa_etaria" className="input-group-text">Faixa Etária:</label>
+            <select name="faixa_etaria" className='form-select' id='faixa_etaria' onChange={handleChange}>
+              <option disabled>Selecione uma opção</option>
+              <option value="Idoso">Idoso</option>
+              <option value="Adulto">Adulto</option>
+              <option value="Criança">Criança</option>
+            </select>
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="endereco" className="input-group-text">Endereço:</label>
+            <input
+              type="text"
+              className='form-control'
+              id="endereco"
+              name="endereco"
+              value={formValues.endereco}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='mb-3 input-group'>
+            <label htmlFor="bairro" className='input-group-text'>Bairro</label>
+            <input type="text" name='bairro' className='form-control' value={formValues.bairro} onChange={handleChange} />
+          </div>
+          <div className="mb-3 input-group">
+            <label htmlFor="responsavelcpf" className="input-group-text">CPF do Responsável:</label>
+            <input
+              type="text"
+              className='form-control'
+              id="responsavelcpf"
+              name="responsavelcpf"
+              value={formValues.responsavelcpf}
+              onChange={handleChange}
+            />
+            <span className="input-group-text">{responsavelNome}</span>
+          </div>
+          <button type="submit" className="btn btn-primary">Cadastrar Beneficiado</button>
+        </form>
+      </div>
     </>
   );
 };
