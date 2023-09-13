@@ -2,7 +2,7 @@ import { prisma } from '../../database/client.js'
 
 export async function updateBeneficiadoController(req, res) {
   const { beneficiadocpf } = req.params;
-  const { novocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, bairro, responsavelcpf } = req.body;
+  const { registro, novocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, bairro, responsavelcpf } = req.body;
 
   try {
     const beneficiado = await prisma.beneficiado.update({
@@ -10,6 +10,7 @@ export async function updateBeneficiadoController(req, res) {
         beneficiadocpf
       },
       data: {
+        registro,
         beneficiadocpf: novocpf,
         nome,
         data_nascimento,

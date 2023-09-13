@@ -3,6 +3,7 @@ import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
 interface BeneficiadoFormData {
+  registro: number;
   beneficiadocpf: string;
   nome: string;
   data_nascimento: string;
@@ -18,6 +19,7 @@ interface BeneficiadoFormData {
 
 const CadastrarBeneficiado = () => {
   const [formValues, setFormValues] = useState<BeneficiadoFormData>({
+    registro: 0,
     beneficiadocpf: '',
     nome: '',
     data_nascimento: '',
@@ -36,9 +38,12 @@ const CadastrarBeneficiado = () => {
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
+
+    const parsedValue = name === 'registro' ? parseInt(value) : value;
+
     setFormValues((prevValues) => ({
       ...prevValues,
-      [name]: value,
+      [name]: parsedValue,
     }));
 
     if (name === 'responsavelcpf') {
@@ -60,9 +65,10 @@ const CadastrarBeneficiado = () => {
 
   const handleNewBeneficiado = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { beneficiadocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, bairro, responsavelcpf } = formValues;
+    const { registro, beneficiadocpf, nome, data_nascimento, genero, telefone, email, cep, faixa_etaria, endereco, bairro, responsavelcpf } = formValues;
 
     const data = {
+      registro,
       beneficiadocpf,
       nome,
       data_nascimento,
@@ -93,6 +99,19 @@ const CadastrarBeneficiado = () => {
       <div className='container d-flex justify-content-center align-items-center'>
 
         <form onSubmit={handleNewBeneficiado}>
+          <div className="mb-3 input-group">
+            <label htmlFor="registro" className="input-group-text">
+              Número de Registro:
+            </label>
+            <input
+              type="text"
+              className='form-control'
+              id="registro"
+              name="registro"
+              value={formValues.registro}
+              onChange={handleChange}
+            />
+          </div>
           <div className="mb-3 input-group">
             <label htmlFor="beneficiadocpf" className="input-group-text">
               CPF:
@@ -130,8 +149,7 @@ const CadastrarBeneficiado = () => {
           </div>
           <div className="mb-3 input-group">
             <label htmlFor="genero" className="input-group-text">Gênero:</label>
-            <select name="genero" id="genero" className='form-select' onChange={handleChange}>
-              <option disabled>Clique para selecionar</option>
+            <select name="genero" id="genero" className='form-select' onChange={handleChange} defaultValue="Masculino">
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
               <option value="Não Binário">Não Binário</option>
@@ -172,8 +190,7 @@ const CadastrarBeneficiado = () => {
           </div>
           <div className="mb-3 input-group">
             <label htmlFor="faixa_etaria" className="input-group-text">Faixa Etária:</label>
-            <select name="faixa_etaria" className='form-select' id='faixa_etaria' onChange={handleChange}>
-              <option disabled>Selecione uma opção</option>
+            <select name="faixa_etaria" className='form-select' id='faixa_etaria' onChange={handleChange} defaultValue="Idoso">
               <option value="Idoso">Idoso</option>
               <option value="Adulto">Adulto</option>
               <option value="Criança">Criança</option>

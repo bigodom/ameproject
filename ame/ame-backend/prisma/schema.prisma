@@ -18,6 +18,7 @@ model Responsavel {
 }
 
 model Beneficiado {
+  registro         Int
   beneficiadocpf   String      @id
   nome             String
   data_nascimento  String
