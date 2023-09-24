@@ -2,7 +2,7 @@ import { prisma } from '../../database/client.js'
 
 export async function updateResponsavelController(req, res) {
   const { responsavelcpf } = req.params;
-  const { novocpf, nome } = req.body;
+  const { novocpf, nome, pacotes } = req.body;
 
   try {
     const responsavel = await prisma.responsavel.update({

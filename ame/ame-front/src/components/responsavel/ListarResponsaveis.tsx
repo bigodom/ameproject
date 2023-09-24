@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export interface Responsavel {
     responsavelcpf: string;
@@ -10,6 +11,7 @@ export interface Responsavel {
 const ListarResponsaveis = () => {
     const [responsaveis, setResponsaveis] = useState<Responsavel[]>([]);
     const [filtro, setFiltro] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('/responsaveis').then(response => {
@@ -21,6 +23,16 @@ const ListarResponsaveis = () => {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFiltro(event.target.value);
     };
+
+    const handleDeleteResponsavel = async (responsavelcpf: string) => {
+        try {
+            await api.delete(`/responsavel/${responsavelcpf}`);
+            alert('Responsavel deletado com sucesso!');
+            setResponsaveis(responsaveis.filter(responsavel => responsavel.responsavelcpf !== responsavelcpf));
+        } catch (error) {
+            alert('Erro ao deletar responsavel!');
+        }
+    }
 
     //retorna uma tabela com coluna nome e coluna cpf dos responsaveis
     return (
@@ -43,7 +55,8 @@ const ListarResponsaveis = () => {
                                 <td>{responsavel.nome}</td>
                                 <td>{responsavel.responsavelcpf}</td>
                                 <td>{responsavel.pacotes}</td>
-                                <td><button className="btn btn-primary">ATUALIZAR</button></td>
+                                <td><button className="btn btn-primary" onClick={()=>navigate(`/atualizarresponsavel/${responsavel.responsavelcpf}`)}>ATUALIZAR</button></td>
+                                <td><button className="btn btn-danger" onClick={()=>handleDeleteResponsavel(responsavel.responsavelcpf)}>DELETAR</button></td>
                             </tr>
                         ))}
                 </tbody>
