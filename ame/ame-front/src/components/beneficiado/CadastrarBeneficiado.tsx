@@ -23,11 +23,11 @@ const CadastrarBeneficiado = () => {
     beneficiadocpf: '',
     nome: '',
     data_nascimento: '',
-    genero: '',
+    genero: 'Masculino',
     telefone: '',
     email: '',
     cep: '',
-    faixa_etaria: '',
+    faixa_etaria: 'Idoso',
     endereco: '',
     bairro: '',
     responsavelcpf: '',
@@ -54,14 +54,12 @@ const CadastrarBeneficiado = () => {
         setResponsavelNome('');
       }
     }
-  };
+  }
 
   const fetchResponsavelNome = async (cpf: string) => {
-    // Faça uma chamada à API para buscar o nome do responsável com base no CPF fornecido
-    // Substitua 'sua-api.com' pela URL correta da sua API
     const response = await api.get(`/responsavel/${cpf}`);
     return response.data;
-  };
+  }
 
   const handleNewBeneficiado = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -149,7 +147,7 @@ const CadastrarBeneficiado = () => {
           </div>
           <div className="mb-3 input-group">
             <label htmlFor="genero" className="input-group-text">Gênero:</label>
-            <select name="genero" id="genero" className='form-select' onChange={handleChange} defaultValue="Masculino">
+            <select name="genero" id="genero" className='form-select' onChange={handleChange} value={formValues.genero}>
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
               <option value="Não Binário">Não Binário</option>
@@ -190,7 +188,7 @@ const CadastrarBeneficiado = () => {
           </div>
           <div className="mb-3 input-group">
             <label htmlFor="faixa_etaria" className="input-group-text">Faixa Etária:</label>
-            <select name="faixa_etaria" className='form-select' id='faixa_etaria' onChange={handleChange} defaultValue="Idoso">
+            <select name="faixa_etaria" className='form-select' id='faixa_etaria' onChange={handleChange} value={formValues.faixa_etaria}>
               <option value="Idoso">Idoso</option>
               <option value="Adulto">Adulto</option>
               <option value="Criança">Criança</option>

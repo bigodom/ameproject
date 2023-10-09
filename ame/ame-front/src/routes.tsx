@@ -5,6 +5,7 @@ import { ListarBeneficiados } from "./components/beneficiado/ListarBeneficiados"
 import { CadastrarBeneficiado } from "./components/beneficiado/CadastrarBeneficiado";
 import { Navbar } from "./components/navbar/Navbar";
 import { AtualizarResponsavel } from "./components/responsavel/AtualizarResponsavel";
+import { AtualizarBeneficiado } from "./components/beneficiado/AtualizarBeneficiado";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/cadastrarbeneficiado" element={<><Navbar/><CadastrarBeneficiado /></>}/>
         <Route path="/listarbeneficiados" element={<><Navbar  /><ListarBeneficiados /></>}/>
         <Route path="/atualizarresponsavel/:responsavelcpf" element={<><Navbar/><AtualizarResponsavel /></>}/>
+        <Route path="/atualizarbeneficiado/:beneficiadocpf" element={<><Navbar/><AtualizarBeneficiado /></>}/>
       </Routes>
     </BrowserRouter>
   )

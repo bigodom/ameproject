@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Responsavel } from "../responsavel/ListarResponsaveis";
+import { useNavigate } from "react-router-dom";
 
 export interface Beneficiado {
     beneficiadocpf: string;
@@ -20,6 +21,7 @@ const ListarBeneficiados = () => {
     const [beneficiados, setBeneficiados] = useState<Beneficiado[]>([]);
     const [responsaveis, setResponsaveis] = useState<Responsavel[]>([]);
     const [filtro, setFiltro] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('/beneficiados').then(response => {
@@ -43,6 +45,16 @@ const ListarBeneficiados = () => {
         const mes = (data.getMonth() + 1).toString().padStart(2, '0');
         const ano = data.getFullYear();
         return `${dia}-${mes}-${ano}`;
+    }
+
+    const handleDeleteBeneficiado = async (beneficiadocpf: string) => {
+        try {
+            await api.delete(`/beneficiado/${beneficiadocpf}`);
+            alert('Beneficiado deletado com sucesso!');
+            setBeneficiados(beneficiados.filter(beneficiado => beneficiado.beneficiadocpf !== beneficiadocpf));
+        } catch (error) {
+            alert('Erro ao deletar beneficiado!');
+        }
     }
 
     return (
@@ -85,6 +97,8 @@ const ListarBeneficiados = () => {
                                 ))}</td>
                                 <td>{beneficiado.responsavelcpf}</td>
                                 <td>{formatDate(beneficiado.data_cadastro)}</td>
+                                <td><button className="btn btn-primary" onClick={()=>navigate(`/atualizarbeneficiado/${beneficiado.beneficiadocpf}`)}>ATUALIZAR</button></td>
+                                <td><button className="btn btn-danger" onClick={()=>handleDeleteBeneficiado(beneficiado.beneficiadocpf)}>DELETAR</button></td>
                             </tr>
                         ))}
                 </tbody>
