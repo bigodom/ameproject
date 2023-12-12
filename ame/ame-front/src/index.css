@@ -1,8 +1,25 @@
-:root {
-    background-color: rgb(255, 255, 255);
-    align-content: center;
+body {
+    background-color: #F0F0F0;
 }
 
-.modal {
-    align-items: center;
+.form-control, .form-select {
+    border: 1px solid black;
+}
+
+.cadastro {
+    width: 40%;
+}
+
+.formularios {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 768px) {
+    .formularios {
+        flex-direction: column;
+    }
+    .cadastro {
+        width: 100%;
+    }
 }
